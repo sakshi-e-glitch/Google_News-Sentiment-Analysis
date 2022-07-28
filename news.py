@@ -23,7 +23,8 @@ class GoogleSearchNews:
         except: pass
 
     def scrape_articles(self):
-        pages = self.paginate("https://www.google.com/search?q=covid+19+india&sxsrf=ALiCzsbFF20mR8EgVYoIo_i-jOglEn3mQQ:1658986430787&source=lnms&tbm=nws&sa=X&ved=2ahUKEwjkp5OH7pr5AhWzv2MGHdsqCV4Q_AUoAXoECAIQAw&biw=1536&bih=722&dpr=1.25")
+        search = "Religions"
+        pages = self.paginate(f"https://www.google.com/search?q={search}&sxsrf=ALiCzsbFF20mR8EgVYoIo_i-jOglEn3mQQ:1658986430787&source=lnms&tbm=nws&sa=X&ved=2ahUKEwjkp5OH7pr5AhWzv2MGHdsqCV4Q_AUoAXoECAIQAw&biw=1536&bih=722&dpr=1.25")
         NewsList = []
         for page in pages:
             num_page = page.html.find("td.YyVfkd")[0].text
@@ -33,22 +34,22 @@ class GoogleSearchNews:
             #print(articles)
             for article in articles:
                 title = article.find("div.mCBkyc")[0].text
-                link = article.attrs['href']
-                source = article.find("div.CEMjEf")[0].text
-                date_published = article.find("div.ZE0LJd")[0].text
-                if len(article.find("div.GI74Re")) >= 1:
-                    description_ = article.find("div.GI74Re")[0].text
-                    #print(description_) 
-                else:
-                    description_ = "NA"
+                # link = article.attrs['href']
+                # source = article.find("div.CEMjEf")[0].text
+                # date_published = article.find("div.ZE0LJd")[0].text
+                # if len(article.find("div.GI74Re")) >= 1:
+                #     description_ = article.find("div.GI74Re")[0].text
+                #     #print(description_) 
+                # else:
+                #     description_ = "NA"
                     #print("NA")
                 #print(title, link)
                 NewsList.append({
                     "Title":title,
-                    "Link": link,
-                    "Description": description_,
-                    "Source": source,
-                    "Date Published": date_published
+                    # "Link": link,
+                    # "Description": description_,
+                    # "Source": source,
+                    # "Date Published": date_published
                 })
         #print(NewsList)  
         return NewsList
